@@ -6,6 +6,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import io.github.mateusblm.domain.Agencia;
 import io.github.mateusblm.domain.http.AgenciaHttp;
+import io.github.mateusblm.domain.http.SituacaoCadastral;
 import io.github.mateusblm.exceptions.AgenciaNaoAtivaOuNaoEncontradaException;
 import io.github.mateusblm.service.http.SituacaoCadastralHttpService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -25,7 +26,8 @@ public class AgenciaService {
         AgenciaHttp agenciaHttp = 
             situacaoCadastralHttpService.buscarPorCnpj(agencia.getCnpj());
 
-        if(agenciaHttp.getSituacaoCadastral().equals(agenciaHttp.getSituacaoCadastral().ATIVA)) {
+        agenciaHttp.getSituacaoCadastral();
+        if(agenciaHttp.getSituacaoCadastral().equals(SituacaoCadastral.ATIVA)) {
             agencias.add(agencia);
         } else {
             throw new AgenciaNaoAtivaOuNaoEncontradaException();
